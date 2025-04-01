@@ -1,4 +1,11 @@
 package org.zerock.service;
 
-public class CompanyServiceImpl {
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+import org.springframework.stereotype.Service;
+
+@Service
+@AllArgsConstructor
+@Log4j
+public class CompanyServiceImpl implements CompanyService{
 }
