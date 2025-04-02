@@ -5,13 +5,10 @@ import lombok.Data;
 import java.sql.Timestamp;
 
 @Data
-public class CartVO {
-    private int cseq;
-    private String id;
+public class OrderDetailVO {
+    private int odseq;
     private int pseq;
-    private String mname;
-    private String pname;
+    private int oseq;
     private int quantity;
-    private int price2;
     private Timestamp indate;
 }

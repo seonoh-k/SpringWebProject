@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.nonage.service.CompanyService;
 
 @Controller
-@RequestMapping("/product/*")
+@RequestMapping("/company/*")
 @Log4j
 @AllArgsConstructor
 public class CompanyController {

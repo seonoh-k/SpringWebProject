@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.nonage.service.AdminService;
 
 @Controller
-@RequestMapping("/product/*")
+@RequestMapping("/admin/*")
 @Log4j
 @AllArgsConstructor
 public class AdminController {

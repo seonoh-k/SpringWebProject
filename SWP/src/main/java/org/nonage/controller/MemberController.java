@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.nonage.service.MemberService;
 
 @Controller
-@RequestMapping("/product/*")
+@RequestMapping("/member/*")
 @Log4j
 @AllArgsConstructor
 public class MemberController {
