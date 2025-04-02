@@ -5,7 +5,7 @@
 
 <article>
     <h1>Login</h1>
-    <form method="post" action="NonageServlet?command=login">
+    <form method="post">
         <fieldset>
         <legend></legend>
             <label>User ID</label>
