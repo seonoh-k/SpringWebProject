@@ -14,9 +14,9 @@
                                 SELECT * FROM product
                                 ORDER BY pseq DESC
                             ) inner_table
-                            WHERE ROWNUM <= #{endRow}
+                            WHERE ROWNUM <= #{pageVO.endRow}
                         )
-                        WHERE rnum > #{startRow}
+                        WHERE rnum > #{pageVO.startRow}
                 ]]>
         </select>
         <insert id="insertProduct" parameterType="org.nonage.domain.ProductVO">
@@ -24,20 +24,52 @@
                 (pseq, name, kind, price1, price2, price3, content, image)
                 VALUES
                 (product_seq.nextval,
-                #{name},
-                #{kind},
-                #{price1},
-                #{price2},
-                #{price3},
-                #{content},
-                #{image})
+                #{productVO.name},
+                #{productVO.kind},
+                #{productVO.price1},
+                #{productVO.price2},
+                #{productVO.price3},
+                #{productVO.content},
+                #{productVO.image})
         </insert>
         <select id="getProduct" resultType="org.nonage.domain.ProductVO">
                 select * from product where pseq = #{pseq}
         </select>
+        <!--  name이 있을 경우 검색 조건이 적용 없으면 전체 카운트 반환      -->
         <select id="getListCount" resultType="int">
-                select COUNT(*) from product
+                SELECT COUNT(*) FROM product
+                <where>
+                        <if test="name != null and name != ''">
+                                name LIKE '%' || #{name} || '%'
+                        </if>
+                </where>
         </select>
 
+        <select id="adminProductSearchList" resultType="org.nonage.domain.ProductVO">
+                <![CDATA[
+                        SELECT * FROM ( SELECT ROWNUM AS rnum, inner_table.*
+                            FROM (
+                                        SELECT * FROM product
+                                        WHERE name LIKE '%' || #{name} || '%'
+                                        ORDER BY pseq DESC
+                                ) inner_table
+                            WHERE ROWNUM <= #{pageVO.endRow}
+                        ) WHERE rnum > #{pageVO.startRow}
+                ]]>
+        </select>
+
+        <update id="updateProduct" parameterType="org.nonage.domain.ProductVO">
+                UPDATE product
+                SET name = #{productVO.name},
+                kind = #{productVO.kind},
+                price1 = #{productVO.price1},
+                price2 = #{productVO.price2},
+                price3 = #{productVO.price3},
+                content = #{productVO.content},
+                image = #{productVO.image},
+                useyn = #{productVO.useyn},
+                bestyn = #{productVO.bestyn}
+                WHERE pseq = #{productVO.pseq}
+        </update>
 
 </mapper>

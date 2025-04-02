@@ -3,5 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.nonage.mapper.AdminMapper">
 
+    <select id="loginAdmin" resultType="org.nonage.domain.AdminVO">
+        SELECT * FROM worker
+        WHERE id = #{id} AND pwd = #{pwd}
+    </select>
 
 </mapper>

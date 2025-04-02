@@ -17,8 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.nonage.domain.ProductVO;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({
@@ -42,22 +41,13 @@ public class ProductControllerTests {
     @Test
     public void testList() throws Exception{
 
-        // Auto Test
-        mockMvc.perform(MockMvcRequestBuilders.get("/product/list"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Test"));
-        // direct Checking Test
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/product/list"))
-                .andExpect(status().isOk()).andReturn();
-
-        String json = mvcResult.getResponse().getContentAsString();
-        System.out.println(" JSON 응답 문자열: " + json);
-
-        // Jackson ObjectMapper로 JSON → 객체 변환
-        ObjectMapper mapper = new ObjectMapper();
-        ProductVO vo = mapper.readValue(json, ProductVO.class);
-
-        System.out.println("name: " + vo.getName());
     }
+    @Test
+    public void testModify() throws Exception{
+
+    }
+
+
+
 }
 

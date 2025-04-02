@@ -2,6 +2,7 @@ package org.nonage.mapper;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import static org.junit.Assert.*;
 
@@ -25,7 +27,8 @@ public class ProductMapperTests {
 
     @Test
     public void testGetList(){
-        int total = mapper.getListCount();
+        String keyword = "";
+        int total = mapper.getListCount(keyword);
         // assertTrue(total <= 0);
         log.info("Total : " + total);
         PageVO pageVO = new PageVO(1,total);
@@ -73,7 +76,66 @@ public class ProductMapperTests {
     }
     @Test
     public void testGetListCount(){
-        int total = mapper.getListCount();
-        log.info(total);
+        String keyword = "테스트";
+        int totalCount = mapper.getListCount(keyword);
+
+        log.info(totalCount);
     }
+    @Test
+    public void testAdminProductSearchList() {
+        String keyword = "스니커즈"; // 이름에 포함될 검색어
+        int page = 1;
+
+        int totalCount = mapper.getListCount(keyword);
+        PageVO pageVO = new PageVO(page, totalCount);
+
+        List<ProductVO> list = mapper.adminProductSearchList(keyword, pageVO);
+
+        assertNotNull("검색 결과가 null 입니다.", list);
+        assertTrue("검색 결과가 없습니다.", list.size() > 0);
+
+        for (ProductVO vo : list) {
+            log.info("상품명: " + vo.getName() + " / 가격: " + vo.getPrice2());
+            assertTrue("검색어가 상품명에 포함되지 않음", vo.getName().contains(keyword));
+        }
+    }
+
+    @Test
+    public void testUpdateProduct() {
+        ProductVO vo = new ProductVO();
+
+        vo.setPseq(281); // 수정할 제품 번호
+        vo.setName("수정된 상품명");
+        vo.setKind("3");
+        vo.setPrice1(3000);
+        vo.setPrice2(5000);
+        vo.setPrice3(2000); // 계산값
+        vo.setContent("수정된 내용");
+        vo.setImage("updated.jpg");
+        vo.setUseyn("y");
+        vo.setBestyn("n");
+
+        mapper.updateProduct(vo);
+        log.info("업데이트 완료");
+    }
+
+    @Test
+    public void testUpdateProductWrong() {
+        ProductVO vo = new ProductVO();
+
+        vo.setPseq(281); // 수정할 제품 번호
+        vo.setName("수정된 상품명");
+        vo.setKind("9");
+        vo.setPrice1(3000);
+        vo.setPrice2(5000);
+        vo.setPrice3(2000); // 계산값
+        vo.setContent("수정된 내용");
+        vo.setImage("updated.jpg");
+        vo.setUseyn("y");
+        vo.setBestyn("y");
+
+        mapper.updateProduct(vo);
+        log.info("업데이트 완료");
+    }
+
 }
