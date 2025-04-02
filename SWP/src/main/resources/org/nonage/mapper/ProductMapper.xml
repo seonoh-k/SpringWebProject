@@ -2,6 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.nonage.mapper.ProductMapper">
+        <!--  public ArrayList<AdminProductVO> listProduct() -->
+        <!--        SELECT pseq, name, price1, price2, indate, useyn FROM product-->
+        <!--        public void updateProduct(AdminProductVO product) {-->
+
+        <select id="getProductList" resultType="org.nonage.domain.ProductVO" parameterType="org.nonage.domain.PageVO">
+                <![CDATA[
+                        SELECT * FROM (
+                            SELECT ROWNUM AS rnum, inner_table.*
+                            FROM (
+                                SELECT * FROM product
+                                ORDER BY pseq DESC
+                            ) inner_table
+                            WHERE ROWNUM <= #{endRow}
+                        )
+                        WHERE rnum > #{startRow}
+                ]]>
+        </select>
+        <insert id="insertProduct" parameterType="org.nonage.domain.ProductVO">
+                INSERT INTO product
+                (pseq, name, kind, price1, price2, price3, content, image)
+                VALUES
+                (product_seq.nextval,
+                #{name},
+                #{kind},
+                #{price1},
+                #{price2},
+                #{price3},
+                #{content},
+                #{image})
+        </insert>
+        <select id="getProduct" resultType="org.nonage.domain.ProductVO">
+                select * from product where pseq = #{pseq}
+        </select>
+        <select id="getListCount" resultType="int">
+                select COUNT(*) from product
+        </select>
 
 
 </mapper>
