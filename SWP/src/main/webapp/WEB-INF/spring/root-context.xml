@@ -39,8 +39,8 @@
     <tx:annotation-driven />
 
     <!-- base-package 경로에서 어노테이션 @Component를 입력한 클래스를 스프링 컨테이너에 등록 -->
-    <context:component-scan base-package="org.zerock.sample" />
+    <context:component-scan base-package="org.nonage.sample" />
     <!-- 스프링 컨테이너에 인터페이스를 등록하면 스프링 컨테이너에서 인터페이스를 상속받는 클래스를 자동으로 생성하여 추상 메소드 사용 -->
-    <mybatis-spring:scan base-package="org.zerock.mapper" />
-    <context:component-scan base-package="org.zerock.service" />
+    <mybatis-spring:scan base-package="org.nonage.mapper" />
+    <context:component-scan base-package="org.nonage.service" />
 </beans>
