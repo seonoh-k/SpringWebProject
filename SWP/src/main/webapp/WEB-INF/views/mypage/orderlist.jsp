@@ -4,7 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@include file="../includes/header.jsp"%>
-<article>
+
+<div class="container product-list-page p-5">
     <h2> Order List </h2>
     <form name="formm" method="post">
         <c:choose>
@@ -12,14 +13,20 @@
                 <h3 style="color: red; text-align: center">주문내역이 없습니다</h3>
             </c:when>
             <c:otherwise>
-                <table id="cartList">
-                    <tr>
-                        <th>상품명</th> <th>수 량</th><th>가 격</th> <th>주문일</th> <th> 진행 상태 </th>
-                    </tr>
+                <table class="table table-bordered text-center">
+                    <thead class="table-dark-header">
+                        <tr>
+                            <th>상품명</th>
+                            <th>수 량</th>
+                            <th>가 격</th>
+                            <th>주문일</th>
+                            <th>진행 상태</th>
+                        </tr>
+                    </thead>
                     <c:forEach  var="order" items="${orderList}">
                     <tr>
                         <td>
-                           <a href="/product/productdetail?pseq=${order.pseq}">
+                           <a class="nav-link" href="/product/productdetail?pseq=${order.pseq}">
                                <h3> ${order.pname} </h3>
                            </a>
                         </td>
@@ -37,10 +44,10 @@
                 </table>
             </c:otherwise>
         </c:choose>
-        <div class="clear"></div>
-        <div id="buttons" style="float: right">
-            <input type="button"    value="쇼핑 계속하기"  class="cancel"  onclick="location.href='/main'">
+        <div id="buttons" class="text-center mt-5">
+            <input type="button"    value="쇼핑 계속하기"  class='btn btn-outline-dark mt-auto'  onclick="location.href='/main'">
         </div>
     </form>
-</article>
+</div>
+
 <%@include file="../includes/footer.jsp"%>

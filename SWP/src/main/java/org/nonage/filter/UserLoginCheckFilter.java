@@ -20,14 +20,17 @@ public class UserLoginCheckFilter implements Filter {
      * QnA 관리자 요청이름으로된 XML 주석이 시작점이며 참고 할 것
      */
     private final List<String> protectedUrls = Arrays.asList(
-            "/qna/adminqnalist",
-            "/qna/adminqnadetail",
-            "/qna/adminqnainsert",
-            "/product/adminproductdetail",
-            "/product/adminproductlist",
-            "/product/productinsert",
-            "/product/productmodify",
-            "/product/adminproductsearch"
+            "/mypage/cartlist",
+            "/mypage/invoice",
+            "/mypage/orderlist",
+            "/mypage/totallist",
+            "/product/kindlist",
+            "/product/productdetail",
+            "/qna/qnalist",
+            "/qna/qnainsert",
+            "/qna/qnadetail",
+            "/order/totallist",
+            "/cart/cartlist"
     );
 
     @Override
@@ -76,7 +79,7 @@ public class UserLoginCheckFilter implements Filter {
 
     @Override
     public void destroy() {
-        log.info("[AdminLoginCheckFilter] execute destroy");
+        log.info("[UserLoginCheckFilter] execute destroy");
     }
 }
 

@@ -117,7 +117,62 @@
         <url-pattern>/product/adminproductsearch</url-pattern>
     </filter-mapping>
 
+    <!-- 사용자 로그인 체크 -->
+    <filter>
+        <filter-name>userLoginCheckFilter</filter-name>
+        <filter-class>org.nonage.filter.UserLoginCheckFilter</filter-class>
+    </filter>
 
+    <!-- 마이 페이지 -->
+    <filter-mapping>
+        <filter-name>userLoginCheckFilter</filter-name>
+        <url-pattern>/mypage/cartlist</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>userLoginCheckFilter</filter-name>
+        <url-pattern>/mypage/invoice</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>userLoginCheckFilter</filter-name>
+        <url-pattern>/mypage/orderlist</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>userLoginCheckFilter</filter-name>
+        <url-pattern>/mypage/totallist</url-pattern>
+    </filter-mapping>
+
+    <!-- 상품 페이지 -->
+    <filter-mapping>
+        <filter-name>userLoginCheckFilter</filter-name>
+        <url-pattern>/product/kindlist</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>userLoginCheckFilter</filter-name>
+        <url-pattern>/product/productdetail</url-pattern>
+    </filter-mapping>
+
+    <!-- Q&A 페이지 -->
+    <filter-mapping>
+        <filter-name>userLoginCheckFilter</filter-name>
+        <url-pattern>/qna/qnalist</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>userLoginCheckFilter</filter-name>
+        <url-pattern>/qna/qnainsert</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>userLoginCheckFilter</filter-name>
+        <url-pattern>/qna/qnadetail</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>userLoginCheckFilter</filter-name>
+        <url-pattern>/order/totallist</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>userLoginCheckFilter</filter-name>
+        <url-pattern>/cart/cartlist</url-pattern>
+    </filter-mapping>
 
 </web-app>
 

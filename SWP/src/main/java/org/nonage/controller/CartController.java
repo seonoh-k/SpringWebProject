@@ -24,10 +24,12 @@ public class CartController {
     private CartService service;
 
     @PostMapping("/cartinsert")
-    public String insert(CartVO cart) {
+    public String insert(HttpSession session, CartVO cart) {
         log.info(cart);
 
-        service.insert(cart);
+        MemberVO member = (MemberVO) session.getAttribute("loginUser");
+
+        service.insert(cart, member.getId());
 
         return "redirect:/cart/cartlist";
     }

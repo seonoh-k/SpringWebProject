@@ -4,7 +4,7 @@
 <mapper namespace="org.nonage.mapper.CartMapper">
 
     <insert id="insert">
-        insert into cart (cseq, id, pseq, quantity) values (cart_seq.nextval, #{id}, #{pseq}, #{quantity})
+        insert into cart (cseq, id, pseq, quantity) values (cart_seq.nextval, #{id}, #{cart.pseq}, #{cart.quantity})
     </insert>
 
     <delete id="delete">
