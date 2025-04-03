@@ -51,15 +51,23 @@ function go_cart() {
 }
 
 function go_order() {
-  document.formm.action = "/order/totallist";
-  document.formm.submit();
+  location.href = "/order/totallist";
 }
 
 function go_cart_delete() {
   var count = 0;
+
+  if (!document.formm.cseq.length) {
+    if (document.formm.cseq.checked) {
+      count++;
+    }
+  }
+
   for ( var i = 0; i < document.formm.cseq.length; i++) {
+    alert("" + document.formm.cseq[i].checked);
     if (document.formm.cseq[i].checked == true) {
       count++;
+      alert("" + count);
     }
   }
   if (count == 0) {

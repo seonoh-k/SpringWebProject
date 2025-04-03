@@ -4,7 +4,26 @@
 <mapper namespace="org.nonage.mapper.OrderMapper">
 
     <select id="totalList" resultType="org.nonage.domain.OrderVO">
-        select * from order_view where id = 'ks123'
+        select * from order_view where id = #{id}
     </select>
 
+    <select id="getList" resultType="org.nonage.domain.OrderVO">
+        select * from order_view where id = #{id} and oseq = #{oseq} and result like '%'||#{result}||'%'
+    </select>
+
+    <insert id="orderInsert">
+        insert into orders (oseq, id) values (orders_seq.nextval, #{id})
+    </insert>
+
+    <select id="getMaxOseq" resultType="int">
+        select max(oseq) from orders
+    </select>
+
+    <insert id="insertOrderDetail">
+        insert into order_detail (odseq, pseq, oseq, quantity) values (order_detail_seq.nextval, #{cart.pseq}, #{oseq}, #{cart.quantity})
+    </insert>
+
+    <update id="updateCartResult">
+        update cart set result = 2 where cseq = #{cart.cseq}
+    </update>
 </mapper>

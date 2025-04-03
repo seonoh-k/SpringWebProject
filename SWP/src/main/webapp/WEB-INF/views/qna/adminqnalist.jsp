@@ -2,26 +2,8 @@
     pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style><%@ include file="/css/admin_design_head_footer.css" %></style>
-    <style><%@ include file="/css/default_design.css" %></style>
-    <style>
-        .table-link-text:hover {
-            color: rgb(98, 54, 255);
-        }
-        .table-link-text:active {
-            color: black;
-        }
-    </style>
-    <title>Admin Q&A List</title>
-</head>
-<body>
 
-<%@ include file="/WEB-INF/views/includes/admin_header.jsp" %>
+<%@ include file="../includes/adminheader.jsp" %>
 
 <!-- Admin Q&A List 페이지 시작 -->
 <div class="main-container">
@@ -69,7 +51,7 @@
 </div>
 <!-- Admin Q&A List 페이지 끝 -->
 
-<%@ include file="/WEB-INF/views/includes/admin_footer.jsp" %>
+<%@ include file="../includes/footer.jsp" %>
 
 </body>
 </html>

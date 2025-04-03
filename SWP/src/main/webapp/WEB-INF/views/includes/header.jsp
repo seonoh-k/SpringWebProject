@@ -55,10 +55,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/member/contract">Join</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/adminlogin">Admin</a>
+                        </li>
                     </c:if>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/login">Admin</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/order/totallist">Orders</a>
                     </li>

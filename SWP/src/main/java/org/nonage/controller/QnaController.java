@@ -75,25 +75,15 @@ public class QnaController {
 
     // ==================================ADMIN========================================
     @GetMapping("/adminqnalist")
-    public String adminQnaList(HttpSession session, Model model) {
-        Object adminLoginUser = session.getAttribute("adminLoginUser");
-        if (adminLoginUser == null) {
-            return "redirect:/admin/login";
-        }
-
+    public String adminQnaList(Model model) {
         List<QnaVO> qnaList = qnaService.adminGetList();
         model.addAttribute("adminQnaList", qnaList);
-        return "admin/qna/adminqnalist";
+        return "qna/adminqnalist";
     }
 
 
     @GetMapping("/adminqnadetail")
-    public String adminQnaDetail(@RequestParam("qseq") int qseq, HttpSession session, Model model) {
-        Object adminLoginUser = session.getAttribute("adminLoginUser");
-        if (adminLoginUser == null) {
-            return "redirect:/admin/login";
-        }
-
+    public String adminQnaDetail(@RequestParam("qseq") int qseq, Model model) {
         QnaVO qna = qnaService.adminGetDetail(qseq);
         model.addAttribute("qna", qna);
         return "qna/adminqnadetail";
@@ -106,11 +96,6 @@ public class QnaController {
     public ResponseEntity<String> insertReply(@RequestBody QnaVO qna, HttpSession session) {
 
         log.info("받은 QnA 데이터: " + qna);
-
-        if (session.getAttribute("adminLoginUser") == null) {
-            log.warn("관리자 로그인 필요");
-            return new ResponseEntity<>("UNAUTHORIZED", HttpStatus.UNAUTHORIZED);
-        }
 
         try {
             qnaService.qnaInsertReply(qna);

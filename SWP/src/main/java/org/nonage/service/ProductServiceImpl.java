@@ -74,6 +74,7 @@ public class ProductServiceImpl implements ProductService{
     public ArrayList<ProductVO> adminProductSearchList(String name, PageVO pageVO) {
         return mapper.adminProductSearchList(name, pageVO);
     }
+
     @Override
     public void updateProduct(ProductVO productVO) {
         mapper.updateProduct(productVO);
