@@ -80,8 +80,9 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String join(@ModelAttribute MemberVO newMember) {
+    public String join(@ModelAttribute MemberVO newMember, @RequestParam("addr1") String addr1, @RequestParam("addr2") String addr2) {
         log.info("회원가입 성공하였습니다..");
+        newMember.setAddress(addr1 + " " + addr2);
         service.join(newMember);
         return "redirect:/member/login";
     }
