@@ -98,7 +98,7 @@
         <div class="fw-semibold" style="color: #212529;">상품이미지</div>
       </div>
       <div class="col-md-10 mt-3">
-        <img id="previewImage" src="/images/product/test.jpg" alt="상품 이미지" class="img-fluid rounded border border-1 border-dark-subtle" style="max-height: 400px; object-fit: contain;">
+        <img id="previewImage" src="/resources/product_images/test.jpg" alt="상품 이미지" class="img-fluid rounded border border-1 border-dark-subtle" style="max-height: 400px; object-fit: contain;">
         <input type="hidden" name="image" id="imageInput" value="test.jpg">
         <div class="mt-3">
           <label class="form-label small text-muted">이미지 파일 선택</label>

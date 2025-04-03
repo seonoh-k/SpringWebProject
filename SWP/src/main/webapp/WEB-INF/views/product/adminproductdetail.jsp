@@ -96,14 +96,15 @@
             </div>
           </div>
 
-          <!-- 상품이미지 -->
-          <div class="col-md-2 d-flex align-items-center justify-content-center text-center mt-3">
-            <div class="fw-semibold" style="color: #212529;">상품이미지</div>
-          </div>
-          <div class="col-md-10 mt-3">
-            <img src="/images/product/${product.image}" alt="상품 이미지" class="img-fluid rounded border border-1 border-dark-subtle" style="max-height: 400px; object-fit: contain;">
-            <input type="hidden" name="image" value="${product.image}">
-          </div>
+        <!-- 상품이미지 -->
+        <div class="col-md-2 d-flex align-items-center justify-content-center text-center mt-3">
+          <div class="fw-semibold" style="color: #212529;">상품이미지</div>
+        </div>
+        <div class="col-md-10 mt-3">
+          <img id="previewImage" src="/resources/product_images/${product.image}" alt="상품 이미지" class="img-fluid rounded border border-1 border-dark-subtle" style="max-height: 400px; object-fit: contain;">
+          <input type="hidden" name="image" id="imageInput" value="${product.image}">
+
+        </div>
 
         </div>
 

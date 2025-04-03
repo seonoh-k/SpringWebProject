@@ -103,9 +103,14 @@
           <div class="fw-semibold" style="color: #212529;">상품이미지</div>
         </div>
         <div class="col-md-10 mt-3">
-          <img src="/images/product/${product.image}" alt="상품 이미지" class="img-fluid rounded border border-1 border-dark-subtle" style="max-height: 400px; object-fit: contain;">
-          <input type="hidden" name="image" value="${product.image}">
+          <img id="previewImage" src="/resources/product_images/${product.image}" alt="상품 이미지" class="img-fluid rounded border border-1 border-dark-subtle" style="max-height: 400px; object-fit: contain;">
+          <input type="hidden" name="image" id="imageInput" value="${product.image}">
+          <div class="mt-3">
+            <label class="form-label small text-muted">이미지 파일 선택</label>
+            <input type="file" id="upload" class="form-control" accept="image/*">
+          </div>
         </div>
+
       </div>
 
       <div class="text-center mt-5">
@@ -136,4 +141,15 @@
 
       return true;
     }
+    document.getElementById("upload").addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        if (file) {
+          document.getElementById("imageInput").value = file.name;
+          const reader = new FileReader();
+          reader.onload = function (ev) {
+            document.getElementById("previewImage").src = ev.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
   </script>
