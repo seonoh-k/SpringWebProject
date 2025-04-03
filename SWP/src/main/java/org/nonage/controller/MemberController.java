@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping("/product/*")
+@RequestMapping("/member/*")
 @Log4j
 @AllArgsConstructor
 public class MemberController {
@@ -65,7 +65,7 @@ public class MemberController {
         if (member != null) {
             session.setAttribute("loginUser", member);
             log.info("로그인 성공: 사용자 " + id + " 로그인 성공했습니다.");
-            return "redirect:/";
+            return "redirect:/main";
         } else {
             log.info("로그인 실패: 사용자 " + id + " 의 로그인 정보가 올바르지 않습니다.");
             model.addAttribute("msg", "아이디 또는 비밀번호가 틀렸습니다.");
@@ -106,6 +106,6 @@ public class MemberController {
         // 세션 무효화: 로그인 정보를 삭제
         session.invalidate();
         log.info("로그아웃 완료. 세션이 무효화되었습니다.");
-        return "redirect:/";
+        return "redirect:/main";
     }
 }

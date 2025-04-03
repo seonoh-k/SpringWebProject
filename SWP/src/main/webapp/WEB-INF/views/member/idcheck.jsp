@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title>아이디 중복 체크</title>
-    <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
+    <link href="/resources/css/styles.css" rel="stylesheet" />
     <style type="text/css">
         #wrap {
           margin: 0 20px;

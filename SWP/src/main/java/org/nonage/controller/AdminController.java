@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequiredArgsConstructor
 @Log4j
-@RequestMapping("/admin")
+@RequestMapping("/admin/*")
 public class AdminController {
 
     private final AdminService adminService;
@@ -23,7 +23,7 @@ public class AdminController {
     // 로그인 폼 이동
     @GetMapping("/login")
     public String loginForm() {
-        return "admin/admin_login";
+        return "admin/adminlogin";
     }
 
     // 로그인 처리
@@ -36,18 +36,18 @@ public class AdminController {
         AdminVO admin = adminService.confirmAuth(id, pwd);
 
         if (admin == null || admin.getId() == null) {
-            return "admin/admin_login_fail";
+            return "admin/adminloginfail";
         }
 
         session.setAttribute("adminLoginUser", admin);
-        return "redirect:/admin/admin_product_list";
+        return "redirect:/admin/adminproductlist";
     }
 
     // 로그아웃
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:admin/admin_login";
+        return "redirect:admin/adminlogin";
     }
 
 

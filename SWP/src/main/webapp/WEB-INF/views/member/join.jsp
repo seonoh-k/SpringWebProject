@@ -75,12 +75,12 @@ function idcheck() {
         document.formm.id.focus();
         return;
     }
-    var url = "${pageContext.request.contextPath}/member/idcheck?id=" + document.formm.id.value;
+    var url = "/member/idcheck?id=" + document.formm.id.value;
     window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=530, height=350");
 }
 
 function post_zip() {
-    var url = "${pageContext.request.contextPath}/member/findzipnum";
+    var url = "/member/findzipnum";
     window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=550, height=300");
 }
 </script>

@@ -1,3 +1,5 @@
+package org.nonage.controller;
+
 import lombok.extern.log4j.Log4j;
 import org.nonage.domain.MemberVO;
 import org.nonage.domain.QnaVO;
@@ -14,6 +16,7 @@ import java.util.List;
 
 @Log4j
 @Controller
+@RequestMapping("/qna/*")
 public class QnaController {
 
     private QnaService qnaService;
@@ -32,7 +35,7 @@ public class QnaController {
 
         List<QnaVO> qnaList = qnaService.getList(loginUser.getId());
         model.addAttribute("qnaList", qnaList);
-        return "qna/qna_list";
+        return "qna/qnalist";
     }
 
 
@@ -45,7 +48,7 @@ public class QnaController {
 
         QnaVO qna = qnaService.getDetail(qseq);
         model.addAttribute("qna", qna);
-        return "qna/qna_detail";
+        return "qna/qnadetail";
     }
 
 
@@ -55,7 +58,7 @@ public class QnaController {
         if (loginUser == null) {
             return "redirect:/login";
         }
-        return "qna/qna_insert";
+        return "qna/qnainsert";
     }
 
 
@@ -67,7 +70,7 @@ public class QnaController {
         }
 
         qnaService.qnaInsert(qna, loginUser.getId());
-        return "redirect:/qnalist";
+        return "redirect:qna/qnalist";
     }
 
     // ==================================ADMIN========================================
@@ -80,7 +83,7 @@ public class QnaController {
 
         List<QnaVO> qnaList = qnaService.adminGetList();
         model.addAttribute("adminQnaList", qnaList);
-        return "admin/qna/admin_qna_list";
+        return "admin/qna/adminqnalist";
     }
 
 
@@ -93,7 +96,7 @@ public class QnaController {
 
         QnaVO qna = qnaService.adminGetDetail(qseq);
         model.addAttribute("qna", qna);
-        return "admin/qna/admin_qna_detail";
+        return "qna/adminqnadetail";
     }
 
 

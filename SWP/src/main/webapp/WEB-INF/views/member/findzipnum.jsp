@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <title>우편 번호 검색</title>
-    <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
+    <link href="/resources/css/styles.css" rel="stylesheet" />
     <style type="text/css">
         #popup{
             padding: 0 10px;
@@ -54,7 +54,7 @@
 <div id="popup">
     <h1>우편번호 검색</h1>
     <!-- form의 action 속성을 컨텍스트 경로를 포함하여 지정합니다. -->
-    <form method="post" action="${pageContext.request.contextPath}/member/findzipnum" name="formm">
+    <form method="post" action="/member/findzipnum" name="formm">
         동 이름 : <input name="dong" type="text">
         <input type="submit" value="찾기" class="submit">
     </form>
