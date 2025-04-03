@@ -5,7 +5,7 @@
 
 <article>
     <h1>Login</h1>
-    <form method="post" action="NonageServlet?command=login">
+    <form method="post">
         <fieldset>
         <legend></legend>
             <label>User ID</label>
@@ -17,9 +17,7 @@
         <div id="buttons">
             <input type="submit" value="로그인" class="submit">
             <input type="button" value="회원가입" class="cancel"
-                 onclick="location.href='NonageServlet?command=contract'">
-            <input type="button" value="아이디 비밀번호 찾기" class="submit"
-                 onclick="location.href='NonageServlet?command=find_id_form'">
+                 onclick="location.href='/member/contract'">
         </div>
     </form>
 </article>

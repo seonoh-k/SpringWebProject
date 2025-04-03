@@ -3,5 +3,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.nonage.mapper.QnaMapper">
 
+    <select id="listQnaByUserId" resultType="org.nonage.domain.QnaVO">
+        SELECT * FROM qna WHERE id = #{userid} ORDER BY qseq DESC
+    </select>
+
+    <select id="listAllQna" resultType="org.nonage.domain.QnaVO">
+        SELECT * FROM qna ORDER BY qseq DESC
+    </select>
+
+    <select id="getQnaById" parameterType="int" resultType="org.nonage.domain.QnaVO">
+        SELECT * FROM qna WHERE qseq = #{qseq}
+    </select>
+
+    <insert id="insertQna">
+        INSERT INTO qna (qseq, subject, content, id)
+        VALUES (qna_seq.nextval, #{qna.subject}, #{qna.content}, #{userid})
+    </insert>
+
+    <update id="updateQnaReply">
+        UPDATE qna SET reply = #{reply}, rep = '2' WHERE qseq = #{qseq}
+    </update>
 
 </mapper>
+

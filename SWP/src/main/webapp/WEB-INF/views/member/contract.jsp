@@ -5,11 +5,12 @@
 
 <%@include file="../includes/header.jsp"%>
 
+
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <h2>Join Us</h2>
         <hr><br>
-        <form id="join" action="/member/join" method="get" name="formm">
+        <form id="join" method="post" name="formm">
              언제나 새로운 즐거움이 가득한 Nonage의 회원가입 페이지 입니다. <br>
             Nonage의 회원가입은 무료이며, 회원님의 개인신상에 관한 정보는
             ‘정보통신망이용촉진 및 정보보호등에관한법률’에 의해 회원님의 동의없이
@@ -190,12 +191,20 @@
             </textarea>
             <br><br>
             <div style="text-align: center;">
-            <input type="radio" name="okon1" checked> 동의함 &nbsp; &nbsp; &nbsp;
-            <input type="radio" name="okon1" checked> 동의안함
+                <input type="radio" name="okon1" value="agree" checked> 동의함 &nbsp;&nbsp;&nbsp;
+                <input type="radio" name="okon1" value="disagree"> 동의안함
             </div>
-            <input type="button" value="Next" class="submit"  onclick="go_next()" style="float: right;">
+            <input type="button" value="Next" class="submit" onclick="go_next()" style="float: right;">
         </form>
     </div>
 </section>
-
+<script>
+function go_next() {
+  if (document.formm.okon1[0].checked == true) {
+    document.formm.submit();
+  } else if (document.formm.okon1[1].checked == true) {
+    alert('약관에 동의하셔야만 합니다.');
+  }
+}
+</script>
 <%@include file="../includes/footer.jsp"%>

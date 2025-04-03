@@ -1,11 +1,23 @@
 package org.nonage.service;
 
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
+import lombok.RequiredArgsConstructor;
+import org.nonage.domain.AdminVO;
+import org.nonage.mapper.AdminMapper;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
-@Log4j
-public class AdminServiceImpl implements AdminService{
+@RequiredArgsConstructor
+public class AdminServiceImpl implements AdminService {
+
+    private AdminMapper adminMapper;
+
+    @Override
+    public AdminVO confirmAuth(String id, String pwd) {
+        return adminMapper.confirmAuth(id, pwd);
+    }
+
+    @Override
+    public AdminVO getAdminById(String id) {
+        return adminMapper.getAdminById(id);
+    }
 }

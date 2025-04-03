@@ -1,8 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
-<%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -12,12 +10,13 @@
         <meta name="author" content="" />
         <title>Shop Homepage - Start Bootstrap Template</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/resources/css/styles.css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/member/member.js"></script>
     </head>
     <body>
         <!-- Navigation-->
@@ -42,26 +41,47 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav" style="align:center">
-                        <li class="nav-item"><a class="nav-link" href="/member/login">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/admin/login">Admin</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/member/contract">Join</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/order/totallist">Orders</a></li>
-                    </ul>
-                    <form class="d-flex" action="/cart/cartlist" method="get">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                        </button>
-                    </form>
+                    <c:if test="${not empty sessionScope.loginUser}">
+                        <!-- 로그인한 경우: Logout 메뉴 표시 -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/member/logout">Logout</a>
+                        </li>
+                    </c:if>
+                    <c:if test="${empty sessionScope.loginUser}">
+                        <!-- 로그인하지 않은 경우: Login과 Join 메뉴 표시 -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/member/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/member/contract">Join</a>
+                        </li>
+                    </c:if>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/login">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/order/totallist">Orders</a>
+                    </li>
+                </ul>
+                <form class="d-flex" action="/cart/cartlist" method="get">
+                    <button class="btn btn-outline-dark" type="submit">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                    </button>
+                </form>
                 </div>
             </div>
-        </nav>
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">NONAGE SHOP</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
-                </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">NONAGE SHOP</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Shop the latest trends</p>
             </div>
-        </header>
+        </div>
+    </header>
+
+    <!-- 콘텐츠 영역은 개별 페이지에서 채워집니다. -->
