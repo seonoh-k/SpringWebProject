@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 
 @Data
 public class QnaVO {
+
     private int   qseq;
     private String subject;
     private String content;
@@ -13,4 +14,5 @@ public class QnaVO {
     private String id;
     private String rep;
     private Timestamp indate;
+
 }

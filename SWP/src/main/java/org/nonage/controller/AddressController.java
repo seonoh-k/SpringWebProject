@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping("/address/*")
+@RequestMapping("/product/*")
 @Log4j
 @AllArgsConstructor
 public class AddressController {

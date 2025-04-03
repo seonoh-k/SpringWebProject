@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/cart/*")
+@RequestMapping("/product/*")
 @Log4j
 @AllArgsConstructor
 public class CartController {

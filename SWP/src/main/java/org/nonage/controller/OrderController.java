@@ -12,7 +12,7 @@ import org.nonage.service.OrderService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/order/*")
+@RequestMapping("/product/*")
 @Log4j
 @AllArgsConstructor
 public class OrderController {

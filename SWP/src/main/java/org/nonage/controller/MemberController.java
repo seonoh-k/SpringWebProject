@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping("/member/*")
+@RequestMapping("/product/*")
 @Log4j
 @AllArgsConstructor
 public class MemberController {

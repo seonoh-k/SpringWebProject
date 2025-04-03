@@ -1,11 +1,48 @@
 package org.nonage.service;
 
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
+import org.nonage.domain.QnaVO;
+import org.nonage.mapper.QnaMapper;
+import org.nonage.service.QnaService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-@AllArgsConstructor
-@Log4j
-public class QnaServiceImpl implements QnaService{
+public class QnaServiceImpl implements QnaService {
+
+    private QnaMapper qnaMapper;
+
+    public QnaServiceImpl(QnaMapper qnaMapper) {
+        this.qnaMapper = qnaMapper;
+    }
+
+    @Override
+    public List<QnaVO> getList(String userid) {
+        return qnaMapper.listQnaByUserId(userid);
+    }
+
+    @Override
+    public List<QnaVO> adminGetList() {
+        return qnaMapper.listAllQna();
+    }
+
+    @Override
+    public QnaVO getDetail(int qseq) {
+        return qnaMapper.getQnaById(qseq);
+    }
+
+    @Override
+    public QnaVO adminGetDetail(int qseq) {
+        return qnaMapper.getQnaById(qseq);
+    }
+
+    @Override
+    public void qnaInsert(QnaVO qna, String userid) {
+        qnaMapper.insertQna(qna, userid);
+    }
+
+    @Override
+    public void qnaInsertReply(QnaVO qna) {
+        qnaMapper.updateQnaReply(qna);
+    }
 }
