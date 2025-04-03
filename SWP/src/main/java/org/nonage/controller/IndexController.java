@@ -12,4 +12,9 @@ public class IndexController {
     public void getIndex() {
         log.info("index connected");
     }
+
+    @GetMapping("/about")
+    public void getAbout() {
+        log.info("about connected");
+    }
 }

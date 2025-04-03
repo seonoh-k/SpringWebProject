@@ -5,7 +5,7 @@
 */
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
-(function() {
+$(function() {
     (function(){
 
         $.getJSON("/product/getnewlist", function(arr){
