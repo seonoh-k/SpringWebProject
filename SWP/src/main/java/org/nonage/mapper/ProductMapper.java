@@ -1,16 +1,13 @@
 package org.nonage.mapper;
 
-import org.nonage.domain.ProductVO;
 
 import java.util.ArrayList;
+import org.apache.ibatis.annotations.Param;
+import org.nonage.domain.PageVO;
+import org.nonage.domain.ProductVO;
+
 
 public interface ProductMapper {
-    public ArrayList<ProductVO> getProductList (int page, int limit);
-
-    public void insert (ProductVO product);
-
-    public void modify (ProductVO product);
-
     public ProductVO getDetail (int pseq);
 
     public ArrayList<ProductVO> getNewList();
@@ -18,4 +15,17 @@ public interface ProductMapper {
     public ArrayList<ProductVO> getBestList();
 
     public ArrayList<ProductVO> getKindList(String kind);
+
+    public ArrayList<ProductVO> getProductList(@Param("pageVO") PageVO pageVO);
+
+    public void insertProduct(@Param("productVO") ProductVO productVO);
+
+    public void updateProduct(@Param("productVO") ProductVO productVO);
+
+    public int getListCount(@Param("name") String name);
+
+    public ProductVO getProduct(@Param("pseq") int pseq);
+
+    public ArrayList<ProductVO> adminProductSearchList(@Param("name") String name, @Param("pageVO") PageVO pageVO);
+
 }

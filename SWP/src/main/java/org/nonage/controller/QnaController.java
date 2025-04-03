@@ -29,9 +29,6 @@ public class QnaController {
     @GetMapping("/qnalist")
     public String getList(HttpSession session, Model model) {
         MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-        if (loginUser == null) {
-            return "redirect:/login";
-        }
 
         List<QnaVO> qnaList = qnaService.getList(loginUser.getId());
         model.addAttribute("qnaList", qnaList);
@@ -40,11 +37,7 @@ public class QnaController {
 
 
     @GetMapping("/qnadetail")
-    public String getDetail(@RequestParam("qseq") int qseq, HttpSession session, Model model) {
-        MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-        if (loginUser == null) {
-            return "redirect:/login";
-        }
+    public String getDetail(@RequestParam("qseq") int qseq, Model model) {
 
         QnaVO qna = qnaService.getDetail(qseq);
         model.addAttribute("qna", qna);
@@ -53,11 +46,8 @@ public class QnaController {
 
 
     @GetMapping("/qnainsert")
-    public String qnaInsertForm(HttpSession session) {
-        MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-        if (loginUser == null) {
-            return "redirect:/login";
-        }
+    public String qnaInsertForm() {
+
         return "qna/qnainsert";
     }
 
@@ -65,35 +55,22 @@ public class QnaController {
     @PostMapping("/qnainsert")
     public String qnaInsert(@ModelAttribute QnaVO qna, HttpSession session) {
         MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-        if (loginUser == null) {
-            return "redirect:/login";
-        }
 
         qnaService.qnaInsert(qna, loginUser.getId());
-        return "redirect:qna/qnalist";
+        return "redirect:/qna/qnalist";
     }
 
     // ==================================ADMIN========================================
     @GetMapping("/adminqnalist")
-    public String adminQnaList(HttpSession session, Model model) {
-        Object adminLoginUser = session.getAttribute("adminLoginUser");
-        if (adminLoginUser == null) {
-            return "redirect:/admin/login";
-        }
-
+    public String adminQnaList(Model model) {
         List<QnaVO> qnaList = qnaService.adminGetList();
         model.addAttribute("adminQnaList", qnaList);
-        return "admin/qna/adminqnalist";
+        return "qna/adminqnalist";
     }
 
 
     @GetMapping("/adminqnadetail")
-    public String adminQnaDetail(@RequestParam("qseq") int qseq, HttpSession session, Model model) {
-        Object adminLoginUser = session.getAttribute("adminLoginUser");
-        if (adminLoginUser == null) {
-            return "redirect:/admin/login";
-        }
-
+    public String adminQnaDetail(@RequestParam("qseq") int qseq, Model model) {
         QnaVO qna = qnaService.adminGetDetail(qseq);
         model.addAttribute("qna", qna);
         return "qna/adminqnadetail";
@@ -106,11 +83,6 @@ public class QnaController {
     public ResponseEntity<String> insertReply(@RequestBody QnaVO qna, HttpSession session) {
 
         log.info("받은 QnA 데이터: " + qna);
-
-        if (session.getAttribute("adminLoginUser") == null) {
-            log.warn("관리자 로그인 필요");
-            return new ResponseEntity<>("UNAUTHORIZED", HttpStatus.UNAUTHORIZED);
-        }
 
         try {
             qnaService.qnaInsertReply(qna);

@@ -19,10 +19,11 @@ public class CartServiceImpl implements CartService{
     private CartMapper mapper;
 
     @Override
-    public void insert(CartVO cart) {
+    public void insert(CartVO cart, String id) {
         log.info("service cart : " + cart);
+        log.info(id);
 
-        mapper.insert(cart);
+        mapper.insert(cart, id);
     }
 
     @Override

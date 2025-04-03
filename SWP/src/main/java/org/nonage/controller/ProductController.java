@@ -3,6 +3,7 @@ package org.nonage.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import org.nonage.domain.PageVO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.nonage.domain.ProductVO;
 import org.nonage.service.ProductService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 import java.util.List;
 
@@ -20,27 +24,132 @@ import java.util.List;
 @Log4j
 @AllArgsConstructor
 public class ProductController {
-    /**
-     * Rest 방식으로 처리할 때는 브라우저나 외부에서 서버를 호출할때는 데이터의 포맷과 서버에서
-     * 보내주는 데이터의 타입을 명확히 해주어야한다.
-     * 등록 /replies/new -> POST
-     * 조회 /replies/:rno -> GET
-     * 삭제 /replies/:rno -> DELETE
-     * 수정 /replies/:rno -> PUT OR PATCH
-     * 페이지 /replies/pages/:bno/:page -> GET
-     * @PostMapping(value="url", produces = "내가 이런 타입의 이터로 보내줄게 text/plain; charset=UTF-8", consumes="나는 데이터 이렇게 받을게 application/json"
-     * // REST Controller는 반환하는 데이터를 produces속성에 정의하면 알아서 변환해준다.
-     */
+
     // 생성자에 의한 묵시적 의존 주입
     private ProductService service;
 
+    // URL PPT와 일치
+    @GetMapping("/productinsert")
+    public String insert(@RequestParam(value = "page", defaultValue = "1") int page,
+                                 Model model) {
 
-    @GetMapping(value = "/list")
-    public ResponseEntity<ProductVO> get(){
-        log.info("get : zzzzzzzzzzzzzzzzzzzzzzz");
-        ProductVO productVO = new ProductVO();
-        productVO.setName("Test");
-        return new ResponseEntity<>(productVO,HttpStatus.OK);
+        model.addAttribute("page", page);
+        return "/product/productinsert"; // → productinsert.jsp
+    }
+
+    // URL PPT와 일치
+    // 상품 등록 처리
+    // 객체의 필드에 자동으로 데이터 매핑
+    // @ModelAttribute("productVO")ProductVO productVO
+    @PostMapping("/productinsert")
+    public String insert(@ModelAttribute("productVO") ProductVO productVO,
+                                RedirectAttributes rttr) {
+
+        // 가격 검증
+        if (productVO.getPrice2() < productVO.getPrice1()) {
+            rttr.addFlashAttribute("error", "판매가는 원가보다 같거나 높아야 합니다.");
+            return "redirect:/product/productinsert";
+        }
+
+        // 판매 수익 계산
+        productVO.setPrice3(productVO.getPrice2() - productVO.getPrice1());
+
+        // DB 저장
+        service.insertProduct(productVO);
+
+        return "redirect:/product/adminproductlist";
+    }
+
+    // 상품 수정 화면
+    // URL PPT와 일치
+    @GetMapping("/productmodify")
+    public String modify(@RequestParam("pseq") int pseq,
+                         @RequestParam(value = "page", defaultValue = "1") int page,
+                         Model model) {
+
+        ProductVO product = service.getProduct(pseq);
+        model.addAttribute("product", product);
+        model.addAttribute("page", page);
+
+        return "/product/productmodify"; // → productmodify.jsp
+    }
+    // URL PPT와 일치
+    // 상품 수정 처리
+    @PostMapping("/productmodify")
+    public String modify(@ModelAttribute ProductVO productVO,
+                                @RequestParam(value = "page", defaultValue = "1") int page,
+                                RedirectAttributes rttr) {
+        int price1 = productVO.getPrice1();
+        int price2 = productVO.getPrice2();
+        int price3 = price2 - price1;
+
+        if (price3 < 0) {
+            rttr.addFlashAttribute("error", "판매가는 원가보다 작을 수 없습니다.");
+            return "redirect:/product/productmodify?pseq=" + productVO.getPseq() + "&page=" + page;
+        }
+
+        productVO.setPrice3(price3);
+        service.updateProduct(productVO);
+
+        rttr.addAttribute("page", page);
+        return "redirect:/product/adminproductlist";
+    }
+
+    // 상품 상세 보기
+    // URL PPT와 일치
+    @GetMapping("/adminproductdetail")
+    public String getAdminProductDetail(@RequestParam("pseq") int pseq,
+                                        @RequestParam(value = "page", defaultValue = "1") int page,
+                                         Model model) {
+
+        ProductVO product = service.getProduct(pseq);
+        model.addAttribute("product", product);
+        model.addAttribute("page", page);
+
+        return "/product/adminproductdetail"; // → adminproductdetail.jsp
+    }
+
+    // 관리자 상품 검색
+    // URL PPT와 일치
+    @GetMapping("/productsearch")
+    public String searchList(@RequestParam(defaultValue = "1") int page,
+                                @RequestParam(defaultValue = "") String name,
+                                Model model) {
+
+        int totalCount = service.getListCount(name);
+        PageVO pageVO = new PageVO(page, totalCount);
+
+        List<ProductVO> list = service.adminProductSearchList(name, pageVO);
+
+        model.addAttribute("list", list);
+        model.addAttribute("pageVO", pageVO);
+        model.addAttribute("name", name);
+
+        return "/product/adminproductlist";
+    }
+
+    // 관리자 상품 전체 목록
+    // URL PPT와 일치
+    @GetMapping("/adminproductlist")
+    public String productList(@RequestParam(defaultValue = "1") int page,
+                              @RequestParam(defaultValue = "") String name,
+                              Model model) {
+
+        int totalCount = service.getListCount(name);
+        PageVO pageVO = new PageVO(page, totalCount);
+
+        List<ProductVO> list;
+        if (name == null || name.trim().isEmpty()) {
+            list = service.getProductList(pageVO);
+        } else {
+            list = service.adminProductSearchList(name, pageVO);
+        }
+
+        model.addAttribute("list", list);
+        model.addAttribute("pageVO", pageVO);
+        model.addAttribute("name", name);
+
+        return "/product/adminproductlist";
     }
 
     @GetMapping(value = "/getnewlist", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
