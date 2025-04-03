@@ -4,11 +4,15 @@ package org.nonage.controller;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.nonage.domain.ProductVO;
 import org.nonage.service.ProductService;
+
+import java.util.List;
 
 
 @Controller
@@ -39,4 +43,41 @@ public class ProductController {
         return new ResponseEntity<>(productVO,HttpStatus.OK);
     }
 
+    @GetMapping(value = "/getnewlist", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<ProductVO>> getNewList() {
+
+        return new ResponseEntity<>(service.getNewList(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getbestlist", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<ProductVO>> getBestList() {
+
+        return new ResponseEntity<>(service.getBestList(), HttpStatus.OK);
+    }
+
+    @GetMapping("/kindlist")
+    public String getKindList(@RequestParam("kind") String kind, Model model) {
+        log.info("controller kind : " + kind);
+
+        model.addAttribute("kind", kind);
+
+        List<ProductVO> kindList = service.getKindList(kind);
+        model.addAttribute("kindList", kindList);
+        kindList.forEach(log::info);
+
+        return "/product/kindlist";
+    }
+
+    @GetMapping("/productdetail")
+    public String getDetail(@RequestParam("pseq") int pseq, Model model) {
+        log.info("controller pseq : " + pseq);
+
+        ProductVO product = service.getDetail(pseq);
+        model.addAttribute("product", product);
+        log.info(product);
+
+        return "/product/productdetail";
+    }
 }

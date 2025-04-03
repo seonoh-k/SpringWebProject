@@ -17,6 +17,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/resources/css/styles.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
     <body>
         <!-- Navigation-->
@@ -32,11 +33,11 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/product/kindlist">Heels</a></li>
-                                <li><a class="dropdown-item" href="/product/kindlist">Boots</a></li>
-                                <li><a class="dropdown-item" href="/product/kindlist">Sandals</a></li>
-                                <li><a class="dropdown-item" href="/product/kindlist">Sneakers</a></li>
-                                <li><a class="dropdown-item" href="/product/kindlist">On Sale</a></li>
+                                <li><a class="dropdown-item" href="/product/kindlist?kind=1">Heels</a></li>
+                                <li><a class="dropdown-item" href="/product/kindlist?kind=2">Boots</a></li>
+                                <li><a class="dropdown-item" href="/product/kindlist?kind=3">Sandals</a></li>
+                                <li><a class="dropdown-item" href="/product/kindlist?kind=4">Sneakers</a></li>
+                                <li><a class="dropdown-item" href="/product/kindlist?kind=5">On Sale</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -44,9 +45,9 @@
                         <li class="nav-item"><a class="nav-link" href="/member/login">Login</a></li>
                         <li class="nav-item"><a class="nav-link" href="/admin/login">Admin</a></li>
                         <li class="nav-item"><a class="nav-link" href="/member/contract">Join</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/mypage/order_total">Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/order/totallist">Orders</a></li>
                     </ul>
-                    <form class="d-flex" action="/cart/list" method="get">
+                    <form class="d-flex" action="/cart/cartlist" method="get">
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
