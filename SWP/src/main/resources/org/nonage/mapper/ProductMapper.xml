@@ -3,5 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.nonage.mapper.ProductMapper">
 
+    <select id="getNewList" resultType="org.nonage.domain.ProductVO">
+        select * from new_pro_view
+    </select>
+
+    <select id="getBestList" resultType="org.nonage.domain.ProductVO">
+        select * from best_pro_view
+    </select>
+
+    <select id="getDetail" resultType="org.nonage.domain.ProductVO">
+        select * from product where pseq = #{pseq}
+    </select>
+
+    <select id="getKindList" resultType="org.nonage.domain.ProductVO">
+        select * from product where kind = #{kind}
+    </select>
 
 </mapper>
