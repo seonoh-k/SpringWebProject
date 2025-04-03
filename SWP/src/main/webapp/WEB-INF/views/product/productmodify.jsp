@@ -14,7 +14,7 @@
     </c:if>
     <form method="post" action="/product/productmodify" onsubmit="return validatePrice();">
       <input type="hidden" name="pseq" value="${product.pseq}">
-
+      <input type="hidden" name="page" value="${page}">
       <div class="row border p-4 shadow-sm rounded-4" style="background-color: #fdfdfd;">
         <!-- 상품분류 -->
         <div class="col-md-2 d-flex align-items-center justify-content-center text-center">

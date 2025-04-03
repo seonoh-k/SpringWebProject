@@ -26,20 +26,21 @@ public class ProductController {
     // 생성자에 의한 묵시적 의존 주입
     private ProductService service;
 
-
+    // URL PPT와 일치
     @GetMapping("/productinsert")
-    public String showInsertForm(@RequestParam(value = "page", defaultValue = "1") int page,
+    public String insert(@RequestParam(value = "page", defaultValue = "1") int page,
                                  Model model) {
 
         model.addAttribute("page", page);
         return "/product/productinsert"; // → productinsert.jsp
     }
 
+    // URL PPT와 일치
     // 상품 등록 처리
     // 객체의 필드에 자동으로 데이터 매핑
     // @ModelAttribute("productVO")ProductVO productVO
     @PostMapping("/productinsert")
-    public String insertProduct(@ModelAttribute("productVO") ProductVO productVO,
+    public String insert(@ModelAttribute("productVO") ProductVO productVO,
                                 RedirectAttributes rttr) {
 
         // 가격 검증
@@ -58,9 +59,9 @@ public class ProductController {
     }
 
     // 상품 수정 화면
-    //
+    // URL PPT와 일치
     @GetMapping("/productmodify")
-    public String modifyForm(@RequestParam("pseq") int pseq,
+    public String modify(@RequestParam("pseq") int pseq,
                          @RequestParam(value = "page", defaultValue = "1") int page,
                          Model model) {
 
@@ -70,10 +71,10 @@ public class ProductController {
 
         return "/product/productmodify"; // → productmodify.jsp
     }
-
+    // URL PPT와 일치
     // 상품 수정 처리
     @PostMapping("/productmodify")
-    public String modifyProduct(@ModelAttribute ProductVO productVO,
+    public String modify(@ModelAttribute ProductVO productVO,
                                 @RequestParam(value = "page", defaultValue = "1") int page,
                                 RedirectAttributes rttr) {
         int price1 = productVO.getPrice1();
@@ -87,10 +88,13 @@ public class ProductController {
 
         productVO.setPrice3(price3);
         service.updateProduct(productVO);
-        return "redirect:/product/adminproductlist?page=" + page;
+
+        rttr.addAttribute("page", page);
+        return "redirect:/product/adminproductlist";
     }
 
     // 상품 상세 보기
+    // URL PPT와 일치
     @GetMapping("/adminproductdetail")
     public String getAdminProductDetail(@RequestParam("pseq") int pseq,
                                         @RequestParam(value = "page", defaultValue = "1") int page,
@@ -104,8 +108,9 @@ public class ProductController {
     }
 
     // 관리자 상품 검색
+    // URL PPT와 일치
     @GetMapping("/productsearch")
-    public String productSearch(@RequestParam(defaultValue = "1") int page,
+    public String searchList(@RequestParam(defaultValue = "1") int page,
                                 @RequestParam(defaultValue = "") String name,
                                 Model model) {
 
@@ -122,6 +127,7 @@ public class ProductController {
     }
 
     // 관리자 상품 전체 목록
+    // URL PPT와 일치
     @GetMapping("/adminproductlist")
     public String productList(@RequestParam(defaultValue = "1") int page,
                               @RequestParam(defaultValue = "") String name,

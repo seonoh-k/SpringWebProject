@@ -61,10 +61,6 @@
       <param-name>encoding</param-name>
       <param-value>UTF-8</param-value>
     </init-param>
-    <init-param>
-      <param-name>forceEncoding</param-name>
-      <param-value>true</param-value> <!-- ✅ 이거 꼭 넣어 -->
-    </init-param>
   </filter>
 
   <filter-mapping>
