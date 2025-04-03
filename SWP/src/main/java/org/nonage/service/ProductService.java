@@ -19,10 +19,6 @@ public interface ProductService {
 
     void updateProduct(ProductVO productVO);
 
-    public void insert (ProductVO product);
-
-    public void modify (ProductVO product);
-
     public ProductVO getDetail (int pseq);
 
     public ArrayList<ProductVO> getNewList();
