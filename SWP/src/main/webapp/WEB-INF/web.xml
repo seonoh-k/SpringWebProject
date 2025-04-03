@@ -27,6 +27,19 @@
       <param-name>throwExceptionIfNoHandlerFound</param-name>
       <param-value>true</param-value>
     </init-param>
+
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+
+  <!-- Processes application requests -->
+  <servlet>
+    <servlet-name>appServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+    </init-param>
     <load-on-startup>1</load-on-startup>
 
     <!-- 파일 업로드 설정 -->
@@ -58,9 +71,53 @@
     </init-param>
   </filter>
 
-  <filter-mapping>
-    <filter-name>encoding</filter-name>
-    <servlet-name>appServlet</servlet-name>
-  </filter-mapping>
+    <filter-mapping>
+        <filter-name>encoding</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>adminLoginCheckFilter</filter-name>
+        <filter-class>org.nonage.filter.AdminLoginCheckFilter</filter-class>
+    </filter>
+
+    <!-- QnA 관리자 요청 -->
+    <filter-mapping>
+        <filter-name>adminLoginCheckFilter</filter-name>
+        <url-pattern>/qna/adminqnalist</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>adminLoginCheckFilter</filter-name>
+        <url-pattern>/qna/adminqnadetail</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>adminLoginCheckFilter</filter-name>
+        <url-pattern>/qna/adminqnainsert</url-pattern>
+    </filter-mapping>
+
+    <!-- 상품 관리자 요청 -->
+    <filter-mapping>
+        <filter-name>adminLoginCheckFilter</filter-name>
+        <url-pattern>/product/adminproductdetail</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>adminLoginCheckFilter</filter-name>
+        <url-pattern>/product/adminproductlist</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>adminLoginCheckFilter</filter-name>
+        <url-pattern>/product/productinsert</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>adminLoginCheckFilter</filter-name>
+        <url-pattern>/product/productmodify</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>adminLoginCheckFilter</filter-name>
+        <url-pattern>/product/adminproductsearch</url-pattern>
+    </filter-mapping>
+
+
 
 </web-app>
+
