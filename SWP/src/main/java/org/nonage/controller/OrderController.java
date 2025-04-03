@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.nonage.service.OrderService;
 
 @Controller
-@RequestMapping("/order/*")
+@RequestMapping("/product/*")
 @Log4j
 @AllArgsConstructor
 public class OrderController {

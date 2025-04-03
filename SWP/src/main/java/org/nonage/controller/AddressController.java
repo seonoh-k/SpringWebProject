@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.nonage.service.AddressService;
 
 @Controller
-@RequestMapping("/address/*")
+@RequestMapping("/product/*")
 @Log4j
 @AllArgsConstructor
 public class AddressController {
