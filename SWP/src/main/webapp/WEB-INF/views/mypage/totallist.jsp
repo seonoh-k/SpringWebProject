@@ -20,7 +20,7 @@
                     <c:forEach  var="order" items="${totalList}">
                     <tr>
                         <td>
-                           <a href="/product/productdetail&pseq=${order.pseq}">
+                           <a href="/product/productdetail?pseq=${order.pseq}">
                                <h3> ${order.pname} </h3>
                            </a>
                         </td>
@@ -29,13 +29,12 @@
                         <td> <fmt:formatDate value="${order.indate}" type="date"/></td>
                         <td> 처리 진행 중 </td>
                     </tr>
-
+                    </c:forEach>
                     <tr>
                         <th colspan="2"> 총 액 </th>
                         <th colspan="2"> <fmt:formatNumber value="${totalPrice}" type="currency"/><br></th>
                         <th> 주문 처리가 완료되었습니다. </th>
                     </tr>
-                    </c:forEach>
                 </table>
             </c:otherwise>
         </c:choose>

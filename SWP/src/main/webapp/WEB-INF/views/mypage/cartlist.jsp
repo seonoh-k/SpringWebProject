@@ -32,7 +32,6 @@
                     <td> <input type="checkbox" name="cseq" value= "${cart.cseq}"> </td>
                 </tr>
                 </c:forEach>
-
                 <tr>
                     <th colspan="2"> 총 액 </th>
                     <th colspan="2">

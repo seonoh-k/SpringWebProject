@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Log4j
 @RequestMapping("/admin/*")
 public class AdminController {

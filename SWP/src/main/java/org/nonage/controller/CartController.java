@@ -3,6 +3,7 @@ package org.nonage.controller;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.nonage.domain.CartVO;
+import org.nonage.domain.MemberVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.nonage.service.CartService;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -27,7 +29,7 @@ public class CartController {
 
         service.insert(cart);
 
-        return "/mypage/cartlist";
+        return "redirect:/cart/cartlist";
     }
 
     @PostMapping("/cartdelete")
@@ -36,15 +38,16 @@ public class CartController {
 
         service.delete(cseq);
 
-        return "/mypage/cartlist";
+        return "redirect:/cart/cartlist";
     }
 
     @GetMapping("/cartlist")
-    public String getList(Model model) {
-        String userid = "ks123";
-        log.info("controller userid : " + userid);
+    public String getList(HttpSession session, Model model) {
+        MemberVO member = (MemberVO) session.getAttribute("loginUser");
 
-        List<CartVO> cartList = service.getList(userid);
+        log.info("controller userid : " + member.getId());
+
+        List<CartVO> cartList = service.getList(member.getId());
 
         int totalPrice = 0;
 
