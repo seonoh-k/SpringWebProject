@@ -13,7 +13,8 @@
     </insert>
     <!--  아이디 중복 체크 -->
     <select id="idCheck" parameterType="string" resultType="int">
-        SELECT COUNT(*) FROM member WHERE id = #{id} </select>
+        SELECT COUNT(*) FROM member WHERE id = #{id}
+    </select>
     <!--  우편번호 검색: dong을 포함한 주소 검색  -->
     <select id="findZipNum" resultType="org.nonage.domain.AddressVO">
         SELECT zip_num AS zipNum, sido, gugun, dong, zip_code AS zipCode, bunji

@@ -16,7 +16,6 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/resources/css/styles.css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script type="text/javascript" src="/member/member.js"></script>
         <style>
             .form-control:focus {
                 border-color: #212529 !important;
@@ -127,7 +126,7 @@
                         </li>
                     </c:if>
                     <li class="nav-item">
-                        <a class="nav-link" href="/order/totallist">Orders</a>
+                        <a class="nav-link" href="#" onclick="cCheck()">Orders</a>
                     </li>
                 </ul>
                 <form class="d-flex" action="/cart/cartlist" method="get">

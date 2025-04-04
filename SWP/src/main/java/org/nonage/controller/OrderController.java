@@ -6,6 +6,9 @@ import org.nonage.domain.CartVO;
 import org.nonage.domain.MemberVO;
 import org.nonage.domain.OrderVO;
 import org.nonage.service.CartService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,7 @@ import org.nonage.service.OrderService;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/order/*")
@@ -38,6 +42,22 @@ public class OrderController {
         model.addAttribute("totalPrice", totalPrice);
 
         return "/mypage/totallist";
+    }
+
+    @GetMapping(value = "/companyorder", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<OrderVO>> companyOrder(HttpSession session) {
+        MemberVO member = (MemberVO) session.getAttribute("loginUser");
+        List<OrderVO> companyorder = null;
+
+        if(member != null) {
+            companyorder = service.totalList(member.getId());
+        }else {
+            String id = (String) session.getAttribute("id");
+            companyorder = service.totalList(id);
+        }
+
+        return new ResponseEntity<>(companyorder, HttpStatus.OK);
     }
 
     @PostMapping("/orderinsert")

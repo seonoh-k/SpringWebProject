@@ -9,6 +9,8 @@
   <meta charset="UTF-8">
   <title>NONAGE SHOP Navbar</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style>
         .form-control:focus {
             border-color: #212529 !important;
@@ -97,7 +99,7 @@
             <a class="nav-link" href="/product/adminproductlist">상품리스트</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/#">주문리스트</a>
+            <a class="nav-link" href="/company/invoicelist">기업주문리스트</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/#">회원리스트</a>

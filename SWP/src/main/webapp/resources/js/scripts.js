@@ -83,3 +83,62 @@ function go_order_insert() {
   document.formm.action = "/order/orderinsert";
   document.formm.submit();
 }
+
+function cCheck() {
+    $.getJSON("/company/ccheck", function(result) {
+        if (result == 1) {
+            window.location.href = "/company/getnonage"; // 조건이 참일 경우 이동
+        } else {
+            window.location.href = "/order/totallist"; // 조건이 거짓일 경우 이동
+        }
+    });
+}
+
+$(function() {
+    (function(){
+
+        $.getJSON("/company/getcompany", function(company){
+            var str = "";
+
+            console.log(company);
+
+            str += `<div class='col-md-2 d-flex align-items-center justify-content-center text-center mt-3'>`;
+            str += `<div class='fw-semibold' style='color: #212529;'>기업명</div></div>`;
+            str += `<div class='col-md-4 d-flex align-items-center justify-content-center text-center mt-3'>`;
+            str += `<div class='fw-semibold' style='color: #212529;'>${company.company_name}</div></div>`;
+            str += `<div class='col-md-2 d-flex align-items-center justify-content-center text-center mt-3'>`;
+            str += `<div class='fw-semibold' style='color: #212529;'>사업자 번호</div></div>`;
+            str += `<div class='col-md-4 d-flex align-items-center justify-content-center text-center mt-3'>`;
+            str += `<div class='fw-semibold' style='color: #212529;'>${company.registration_no}</div></div>`;
+            str += `<div class='col-md-2 d-flex align-items-center justify-content-center text-center mt-3'>`;
+            str += `<div class='fw-semibold' style='color: #212529;'>소재지</div></div>`;
+            str += `<div class='col-md-4 d-flex align-items-center justify-content-center text-center mt-3'>`;
+            str += `<div class='fw-semibold' style='color: #212529;'>${company.company_address}</div></div>`;
+            str += `<div class='col-md-2 d-flex align-items-center justify-content-center text-center mt-3'>`;
+            str += `<div class='fw-semibold' style='color: #212529;'>대표 전화</div></div>`;
+            str += `<div class='col-md-4 d-flex align-items-center justify-content-center text-center mt-3'>`;
+            str += `<div class='fw-semibold' style='color: #212529;'>${company.phone}</div></div>`;
+
+            $("#company").html(str);
+        });
+
+        $.getJSON("/order/companyorder", function(arr){
+            var str = "";
+            var totalPrice = 0;
+
+            $(arr).each(function(i, companyOrder){
+                totalPrice += companyOrder.price2 * companyOrder.quantity;
+                str += `<tr><td>`;
+                str += `<a class='nav-link' href='/product/productdetail?pseq=${companyOrder.pseq}'><h4> ${companyOrder.pname} </h4></a></td>`;
+                str += `<td> ${companyOrder.quantity} </td>`;
+                str += `<td> ${new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' })
+                                         .format(companyOrder.price2 * companyOrder.quantity)} </td>`;
+                str += `<td> ${new Date(companyOrder.indate).toLocaleDateString('ko-KR')}</td>`;
+            });
+            str += `<tr><th colspan='2'> 총 액 </th>`;
+            str += `<th colspan='2'> ${new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' })
+                                                                              .format(totalPrice)} </th>`;
+            $("#companyorder").html(str);
+        });
+    })();
+});

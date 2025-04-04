@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%@include file="../includes/header.jsp"%>
+<%@include file="../includes/adminheader.jsp"%>
 
 <div class="container product-list-page p-5">
     <h2> Invoice </h2><hr>
@@ -52,6 +52,9 @@
 
             </tbody>
         </table>
+    </div>
+    <div id="buttons" class="text-center mt-5">
+        <input type="button" value="목록으로" class='btn btn-outline-dark mt-auto' onclick="location.href='/company/invoicelist'">
     </div>
 </div>
 

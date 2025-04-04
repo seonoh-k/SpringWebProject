@@ -3,5 +3,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.nonage.mapper.CompanyMapper">
 
+    <select id="getCompany" resultType="org.nonage.domain.CompanyVO">
+        select * from company where id = #{id}
+    </select>
 
+    <select id="getNonage" resultType="org.nonage.domain.CompanyVO">
+        select * from company where id = 'nonage'
+    </select>
+
+    <select id="cCheck" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM company WHERE id = #{id}
+    </select>
+
+    <select id="invoiceList" resultType="org.nonage.domain.CompanyVO">
+        select * from company where not id = 'nonage'
+    </select>
 </mapper>
