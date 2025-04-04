@@ -123,7 +123,7 @@ function idcheck() {
         return;
     }
     var url = "/member/idcheck?id=" + document.formm.id.value;
-    window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=530, height=350");
+    window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=550, height=350");
 }
 
 function post_zip() {
