@@ -10,6 +10,9 @@
     <title>아이디 중복 체크</title>
     <link href="/resources/css/styles.css" rel="stylesheet" />
     <style type="text/css">
+        #popup{
+           padding: 0 10px;
+        }
         .form-control:focus {
             border-color: #212529 !important;
             box-shadow: 0 0 0.15rem 0.15rem #212529 !important; /* #212529 with alpha */
@@ -74,35 +77,37 @@
     </script>
 </head>
 <body>
-<div class="container py-5">
-    <div class="row mb-4">
-        <div class="col px-4">
-            <h3 class="fw-bold" style="color: #212529;">ID 중복확인</h3>
-        </div>
-    </div>
-    <!-- GET 방식으로 현재 입력된 아이디를 검색 -->
-    <div class="row border p-4 shadow-sm rounded-4" style="background-color: #fdfdfd;">
-        <form method="get" name="idcheckForm" style="margin-right:0;">
-            <div class="col-md-1 d-flex align-items-center justify-content-center text-center mt-2">
-                <div class="fw-semibold" style="color: #212529;">User ID</div>&nbsp;&nbsp;
-                <input type="text" name="id" class="form-control border-dark-subtle text-dark" value="${param.id != null ? param.id : id}" >&nbsp;&nbsp;
-                <input type="submit" value="검색" class='btn btn-outline-dark mt-auto'>
+<div id="popup">
+    <div class="container py-5">
+        <div class="row mb-4">
+            <div class="col px-3">
+                <h3 class="fw-bold" style="color: #212529;">ID 중복확인</h3>
             </div>
-
-        </form>
-        <br>
-        <div style="margin-top: 20px">
-            <!-- 중복일 경우: message 값이 1로 설정 -->
-            <c:if test="${message == 1}">
-                <div class="fw-semibold" style="color: #212529;">${id}는 이미 사용중인 아이디입니다.</div>
-            </c:if>
-            <!-- 사용 가능할 경우: message 값이 0로 설정 -->
-            <c:if test="${message == 0}">
-                <div class="col-md-1 d-flex align-items-center justify-content-center text-center mt-3">
-                    <div class="fw-semibold" style="color: #212529;">${id}는 사용 가능한 ID입니다.</div>&nbsp;&nbsp;
-                    <input type="button" value="사용" class='btn btn-outline-dark mt-auto' onclick="idok()">
+        </div>
+        <!-- GET 방식으로 현재 입력된 아이디를 검색 -->
+        <div class="row border p-4 shadow-sm rounded-4" style="background-color: #fdfdfd;">
+            <form method="get" name="idcheckForm" style="margin-right:0;">
+                <div class="col-md-1 d-flex align-items-center justify-content-center text-center mt-2">
+                    <input type="text" name="id" class="form-control border-dark-subtle text-dark" value="${param.id != null ? param.id : id}" size="10">&nbsp;&nbsp;
+                    <input type="submit" value="검색" class='btn btn-outline-dark mt-auto'>
                 </div>
-            </c:if>
+            </form>
+            <br>
+            <div style="margin-top: 20px">
+                <!-- 중복일 경우: message 값이 1로 설정 -->
+                <c:if test="${message == 1}">
+                    <div class="col-md-1 d-flex align-items-center justify-content-center text-center mt-3">
+                        <div class="fw-semibold" style="color: #212529;">${id}는 이미 사용중인 아이디입니다.</div>
+                    </div>
+                </c:if>
+                <!-- 사용 가능할 경우: message 값이 0로 설정 -->
+                <c:if test="${message == 0}">
+                    <div class="col-md-1 d-flex align-items-center justify-content-center text-center mt-3">
+                        <div class="fw-semibold" style="color: #212529;">${id}는 사용 가능한 ID입니다.</div>&nbsp;&nbsp;
+                        <input type="button" value="사용" class='btn btn-outline-dark mt-auto' onclick="idok()">
+                    </div>
+                </c:if>
+            </div>
         </div>
     </div>
 </div>
